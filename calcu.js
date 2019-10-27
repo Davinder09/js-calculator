@@ -3,21 +3,37 @@ var $ = function (id) {
 };
 
 function sinClicked(){
-    myform.display.value = Math.sin(myform.display.value);
+    if(myform.display.value != ""){
+           myform.display.value = Math.sin(myform.display.value);
+       }
 }
 
 
 function cosClicked(){
-     myform.display.value = Math.cos(myform.display.value);
+    if(myform.display.value != ""){
+     myform.display.value = Math.cos(myform.display.value);   
+    }
 }
 
 
 function tanClicked(){
+     if(myform.display.value != ""){
      myform.display.value = Math.tan(myform.display.value);
+     }
 }
 
 function myClick(a){
     myform.display.value+=a;
+    if(myform.display.value){
+        let prevalue = myform.display.value;
+        let secondLastDigit = prevalue.charAt(prevalue.length-2);
+        let lastDigit = prevalue.charAt(prevalue.length-1);
+        if(secondLastDigit == "+" || secondLastDigit == "-" || secondLastDigit == "*" || secondLastDigit == "/"){
+          if(lastDigit == "+" || lastDigit == "-" || lastDigit == "*" || lastDigit == "/"){
+                myform.display.value = prevalue.slice(0,-2).concat(lastDigit);
+            }  
+        }
+    }
     
 }
 
@@ -26,15 +42,24 @@ function eqlClicked(){
 }
 
 function sqrClicked(){
+    if(myform.display.value != ""){
      myform.display.value = Math.sqrt(myform.display.value);
+    }
 }
 
 function piClicked(){
-     myform.display.value = Math.PI(myform.display.value);
+    if(myform.display.value == ""){
+        myform.display.value = (Math.PI).toFixed(8);
+       }
+       else{
+       myform.display.value = (myform.display.value * Math.PI).toFixed(8);
+       }
 }
 
 function logClicked(){
+    if(myform.display.value != ""){
     myform.display.value = Math.log(myform.display.value);
+    }
 }
 
 function allClearClicked(){
@@ -48,7 +73,9 @@ function delClicked(){
 }
 
 function perClicked(){
-    myform.display.value = Math.floor(myform.display.value);
+    if(myform.display.value != ""){
+    myform.display.value = myform.display.value / 100;
+    }
 
 }
 
@@ -64,5 +91,7 @@ window.onload = function () {
     $("eqlButton").onclick = eqlClicked;
     $("delButton").onclick = delClicked;
     $("acButton").onclick = allClearClicked;
+    $("perButton").onclick = perClicked;
+    
 }
     
